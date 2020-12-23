@@ -22,4 +22,15 @@ public class CrimeListFragment extends Fragment {
         mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
     }
+
+    //реализация адаптера
+    private class CrimeHolder extends RecyclerView.ViewHolder {
+        public CrimeHolder(LayoutInflater inflater, ViewGroup parent){
+            //заполнение айтем листа
+            super(inflater.inflate(R.layout.list_item_crime, parent, false));
+        }
+    }
+
+    //адаптер
+
 }
