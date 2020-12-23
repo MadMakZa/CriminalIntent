@@ -15,6 +15,7 @@ import java.util.List;
 
 public class CrimeListFragment extends Fragment {
     private RecyclerView mCrimeRecyclerView;
+    private CrimeAdapter mAdapter;
 
     @Nullable
     @Override
@@ -22,7 +23,15 @@ public class CrimeListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_crime_list, container, false);
         mCrimeRecyclerView = (RecyclerView) view.findViewById(R.id.crime_recycler_view);
         mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        updateUI();
         return view;
+    }
+    //метод настройки пользовательского интерфейса
+    private void updateUI(){
+        CrimeLab crimeLab = CrimeLab.get(getActivity());
+        List<Crime> crimes = crimeLab.getCrimes();
+        mAdapter = new CrimeAdapter(crimes);
+        mCrimeRecyclerView.setAdapter(mAdapter);
     }
 
     //реализация адаптера
@@ -41,6 +50,7 @@ public class CrimeListFragment extends Fragment {
             mCrimes = crimes;
         }
 
+        //вызывается виджетом RecyclerView, когда ему требуется новое представление для отображения элемента
         @NonNull
         @Override
         public CrimeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,7 +60,7 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull CrimeHolder holder, int position) {
-
+            //пока пусто
         }
 
         @Override
